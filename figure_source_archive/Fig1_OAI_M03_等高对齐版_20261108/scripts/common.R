@@ -1,0 +1,6 @@
+suppressPackageStartupMessages({library(ggplot2);library(patchwork);library(grid)})
+read_input <- function(name) read.csv(file.path(ROOT,"data","plot_inputs",name),stringsAsFactors=FALSE)
+base_theme <- function(){theme_classic(base_family=CFG$family,base_size=CFG$font_pt)+theme(plot.title=element_text(size=CFG$title_pt,face="bold",color=CFG$ink,margin=margin(b=1.5)),axis.title=element_text(size=CFG$font_pt,color=CFG$ink),axis.text=element_text(size=CFG$font_pt,color=CFG$ink),axis.line=element_line(linewidth=.25),axis.ticks=element_line(linewidth=.2),axis.ticks.length=unit(1,"mm"),legend.position="none",plot.margin=margin(1.5,2,1.5,2),plot.title.position="plot")}
+mm_pt <- function(pt) pt/ggplot2::.pt
+open_pdf <- function(path,w,h){if(capabilities("aqua"))quartz(type="pdf",file=path,width=w/25.4,height=h/25.4)else grDevices::cairo_pdf(path,width=w/25.4,height=h/25.4,family=CFG$family)}
+export_plot <- function(plot,name,w,h){prefix<-file.path(ROOT,"figures","panels",name);svglite::svglite(paste0(prefix,".svg"),width=w/25.4,height=h/25.4);print(plot);dev.off();open_pdf(paste0(prefix,".pdf"),w,h);print(plot);dev.off();ragg::agg_png(paste0(prefix,".png"),width=w,height=h,units="mm",res=600,background="white");print(plot);dev.off()}

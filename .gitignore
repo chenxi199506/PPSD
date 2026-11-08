@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# R / IDE leftovers
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Generated figures are not part of this code archive
+*.png
+*.pdf
+*.svg
+*.jpg
+
+# Local configuration / credentials — never commit
+.env
+*.token

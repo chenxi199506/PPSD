@@ -1,0 +1,1 @@
+args<-commandArgs(FALSE);f<-gsub("~+~"," ",sub("^--file=","",args[grep("^--file=",args)][1]),fixed=TRUE);ROOT<-dirname(dirname(normalizePath(f)));r<-file.path(R.home("bin"),"Rscript");for(s in c("01_analyze_new_panels.R","02_draw_candidates.R")){status<-system2(r,shQuote(file.path(ROOT,"scripts",s)));if(status!=0)stop("Failed: ",s)}
